@@ -29,7 +29,7 @@ I managed this with Terraform kubernetes resource.
 
 ## Manage DNS
 In order to access the service with URL,I managed dns record.
-I created a domain name in easyence-tools that points to the address of ingress controller(LoadBalancer).
+I manage a DNS that points to the address of ingress controller(LoadBalancer).
 
 ## TLS and HTTPS Access
 I managed the certificate in order to access the grafana service in HTTPS.
@@ -80,9 +80,9 @@ and you will have this type of result :
 Name:         tls-cert
 Namespace:    monitoring
 Labels:       <none>
-Annotations:  cert-manager.io/alt-names: grafana.tools.easyence.io
+Annotations:  cert-manager.io/alt-names: grafana.demo.example.com
               cert-manager.io/certificate-name: tls-cert
-              cert-manager.io/common-name: grafana.tools.easyence.io
+              cert-manager.io/common-name: grafana.demo.example.com
               cert-manager.io/ip-sans: 
               cert-manager.io/issuer-group: cert-manager.io
               cert-manager.io/issuer-kind: ClusterIssuer
