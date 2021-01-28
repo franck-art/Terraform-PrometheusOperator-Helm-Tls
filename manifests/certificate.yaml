@@ -1,0 +1,53 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: cert-example
+  namespace: cert-manager
+spec:
+  secretName: tls-cert
+  duration: 8760h
+  renewBefore: 5000h
+  commonName: example.com
+  dnsNames:
+    - example.com
+    - grafana.demo.example.com
+  issuerRef:
+    name: letsencrypt-prod 
+    kind: ClusterIssuer
+
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: cert-example-alertmanager
+  namespace: cert-manager
+spec:
+  secretName: tls-cert-alertmanager
+  duration: 8760h
+  renewBefore: 5000h
+  commonName: example.com
+  dnsNames:
+    - example.com
+    - alertmanager.demo.example.com
+  issuerRef:
+    name: letsencrypt-prod 
+    kind: ClusterIssuer
+
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod 
+  namespace: cert-manager
+spec:
+  acme:
+    email: team-devops@example.io
+    privateKeySecretRef:
+      name: letsencrypt-private-key
+    server: https://acme-v02.api.letsencrypt.org/directory
+    solvers:
+    - http01:
+        ingress:
+          class: nginx
+      selector: {}
